@@ -1,0 +1,46 @@
+syntax="proto3";
+
+message ReSystem {
+  string uuid = 1;
+  oneof pvSystemOption {
+    PVSystem pvSystem = 2;
+  }
+  oneof consumerLoadOption {
+    ConsumerLoad consumerLoad = 3;
+  }
+}
+
+message PVSystem {
+  string uuid = 1;
+}
+
+message ConsumerLoad {
+  string uuid = 1;
+}
+
+message Power {
+  double value = 1;
+  PowerUnit unit = 2;
+}
+
+message PowerUnit {
+  oneof unitOption {
+    PredefinedPowerUnit predefinedUnit = 1;
+    UserDefinedPowerUnit userDefinedUnit = 2;
+  }
+}
+
+message UserDefinedPowerUnit {
+  PredefinedPowerUnit baseUnit = 1;
+  double conversionFactor = 2;
+  double unitName = 3;
+}
+
+message PredefinedPowerUnit {
+  enum Unit {
+    W = 0;
+    KW = 1;
+    MW = 2;
+    GW = 3;
+  }
+}
